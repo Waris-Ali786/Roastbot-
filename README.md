@@ -1,130 +1,74 @@
-﻿ #RoastBot — AI Sarcastic Chat System
+# RoastBot — AI Sarcastic Chat System
 
 RoastBot is a Flask-based AI chat application powered by the Groq API using the LLaMA 3.3 70B model. It is designed to generate short-form, sarcastic, humor-driven responses to user input in real time through a web interface.
 
 The system is built as a personality-driven conversational layer rather than a utility chatbot. Its core function is to interpret user input and return controlled, structured, humorous responses with a consistent tone.
 
-#What It Does
+---
 
-Accepts user input through a browser-based chat interface.
-Processes input using Groq-hosted LLaMA 3.3 model.
-Generates concise sarcastic responses (maximum two lines).
-Maintains a consistent roast-oriented personality across all interactions.
-Handles empty or invalid input with fallback responses.
-Streams responses back into a real-time chat UI.
-Includes a responsive frontend with typing state simulation and message rendering.
+# What It Does
 
-System Overview
-Backend (app.py)
+- Accepts user input through a browser-based chat interface
+- Processes input using Groq-hosted LLaMA 3.3 model
+- Generates concise sarcastic responses (maximum two lines)
+- Maintains a consistent roast-oriented personality across all interactions
+- Handles empty or invalid input with fallback responses
+- Streams responses back into a real-time chat UI
+- Includes a responsive frontend with typing state simulation and message rendering
+
+---
+
+# System Overview
+
+## Backend (app.py)
 
 The backend is a Flask application exposing two routes:
 
-/ serves the frontend interface
-/chat processes POST requests containing user input
+- `/` serves the frontend interface  
+- `/chat` processes POST requests containing user input  
 
-Flow:
-
-Receive user message
-Construct structured prompt enforcing tone and length constraints
-Send request to Groq API (llama-3.3-70b-versatile)
-Return generated response as JSON
+### Flow:
+- Receive user message
+- Construct structured prompt enforcing tone and length constraints
+- Send request to Groq API (llama-3.3-70b-versatile)
+- Return generated response as JSON
 
 No persistent memory is used. Each request is stateless.
 
-Frontend (templates/index.html)
+---
+
+## Frontend (templates/index.html)
 
 Single-page chat interface implemented in HTML, CSS, and JavaScript.
 
-#Functions:
+### Functions:
+- Sends asynchronous requests to `/chat`
+- Dynamically renders chat bubbles for user and assistant
+- Displays typing indicator during API calls
+- Provides input prefill shortcuts for faster interaction
+- Maintains a clean conversation flow without page reloads
 
-Sends asynchronous requests to /chat
-Dynamically renders chat bubbles for user and assistant
-Displays typing indicator during API calls
-Provides input prefill shortcuts for faster interaction
-Maintains a clean conversation flow without page reloads
+---
 
-#Tech Stack
-Python
-Flask
-Groq API (LLaMA 3.3 70B Versatile)
-HTML
-CSS
-JavaScript
-Vercel (deployment)
+# Tech Stack
 
-Project Structure
+- Python
+- Flask
+- Groq API (LLaMA 3.3 70B Versatile)
+- HTML
+- CSS
+- JavaScript
+- Vercel (Deployment)
+
+---
+
+# Project Structure
+
+```text
 RoastBot/
 │
-├── app.py              
-
- Flask backend API
+├── app.py                  # Flask backend API
 ├── templates/
-│   └── index.html          
- Frontend chat interface
-├── requirements.txt       
- Dependencies
+│   └── index.html         # Frontend chat interface
+├── requirements.txt       # Dependencies
 └── README.md
-
-
-
-Setup
-Create environment
-python -m venv .venv
-.venv\Scripts\activate
-Install dependencies
-pip install -r requirements.txt
-Configure environment variables
-
-Create a .env file:
-
-GROQ_API_KEY=your_api_key
-Run Locally
-python app.py
-
-Access application:
-
-http://127.0.0.1:5000
-Deployment
-
-The project is deployed on Vercel as a serverless Flask application.
-
-Constraints:
-
-Stateless execution per request
-No persistent session memory
-Environment variables required for API access
-
-Production behavior depends on external API latency (Groq inference).
-
-Prompt Behavior
-
-The system uses a strict instruction layer:
-
-If user input exists:
-
-Generate a sarcastic response
-Include a light insult
-End with a follow-up question
-Limit response to two lines
-
-If input is empty:
-
-Generate a sarcastic fallback response
-Maintain tone consistency
-
-This ensures deterministic personality output across all interactions.
-
-Design Philosophy
-
-RoastBot is not a general-purpose assistant.
-
-It is a controlled personality system built on top of a large language model.
-
-The objective is to demonstrate:
-
-Prompt-driven behavior shaping
-UI-driven conversational perception
-Stateless LLM orchestration
-Lightweight deployment via serverless architecture
-
-Future iterations may include adjustable personality intensity, memory layers, and multi-agent conversational modes.
